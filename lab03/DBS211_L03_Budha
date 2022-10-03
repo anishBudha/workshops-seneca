@@ -1,0 +1,69 @@
+SET AUTOCOMMIT ON;
+
+-- Q1 SOLUTION --
+CREATE TABLE l5_movies (
+    m_id int DEFAULT NULL PRIMARY KEY,
+    title varchar(35) NOT NULL,
+    release_year int NOT NULL,
+    director int NOT NULL,
+    score decimal(3,2) CHECK (score < 5 AND score > 0)
+    
+);
+CREATE TABLE l5_actors (
+    a_id int PRIMARY KEY,
+    first_name varchar(20) NOT NULL,
+    last_name varchar(30) NOT NULL
+);
+CREATE TABLE l5_castings (
+    movie_id int,
+    actor_id int,
+    PRIMARY KEY(movie_id, actor_id),
+    FOREIGN KEY(movie_id) REFERENCES l5_movies(m_id),
+    FOREIGN KEY(actor_id) REFERENCES l5_actors(a_id)
+);
+CREATE TABLE l5_directors (
+    director_id int PRIMARY KEY,
+    first_name varchar(20) NOT NULL,
+    last_name varchar(30) NOT NULL
+);
+
+-- Q2 SOLUTION --
+ALTER TABLE l5_movies 
+ADD CONSTRAINT FK_DirectorMovies FOREIGN KEY (director)
+REFERENCES l5_directors(director_id);
+
+
+-- Q3 SOLUTION --
+ALTER TABLE l5_movies
+ADD CONSTRAINT TitleMoviesUniq UNIQUE(title);
+
+
+-- Q4 SOLUTION --
+INSERT ALL
+    INTO l5_directors(director_id, first_name, last_name) VALUES('1010', 'Rob', 'Minkoff')
+    INTO l5_directors(director_id, first_name, last_name) VALUES('1020', 'Bill', 'Condon')
+    INTO l5_directors(director_id, first_name, last_name) VALUES('1050', 'Josh', 'Cooley')
+    INTO l5_directors(director_id, first_name, last_name) VALUES('2010', 'Brad', 'Bird')
+    INTO l5_directors(director_id, first_name, last_name) VALUES('3020', 'Lake', 'Bell')
+SELECT * FROM dual;
+
+    
+INSERT ALL
+    INTO l5_movies(m_id, title, release_year, director, score) VALUES('100', 'The Lion King', '2019', '3020', '3.50')
+    INTO l5_movies(m_id, title, release_year, director, score) VALUES('200', 'Beauty and the Beast', '2017', '1050', '4.20')
+    INTO l5_movies(m_id, title, release_year, director, score) VALUES('300', 'Toy Stroy 4', '2019', '1020', '4.50')
+    INTO l5_movies(m_id, title, release_year, director, score) VALUES('400', 'Mission Impossible', '2018', '2010', '5.00')
+    INTO l5_movies(m_id, title, release_year, director, score) VALUES('500', 'The Secret Life of Pets', '2016', '1010', '3.90')
+SELECT * FROM dual;
+
+
+---- Q5 SOLUTION --
+DROP TABLE l5_castings;
+DROP TABLE l5_actors;
+DROP TABLE l5_movies;
+DROP TABLE l5_directors;
+
+--The order of tables is important while dropping tables because parent table cannot be dropped while child table with a foreign key exist.
+
+
+
