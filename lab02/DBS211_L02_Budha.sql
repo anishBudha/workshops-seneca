@@ -1,10 +1,3 @@
--- ***********************
--- Name: Anish Budha
--- ID: 174760215
--- Date: 9/23/2022
--- Purpose: Lab 02 DBS211
--- ***********************
-
 -- Q1 SOLUTION --
 SELECT
    officecode,
