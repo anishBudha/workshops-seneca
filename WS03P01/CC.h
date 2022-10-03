@@ -1,9 +1,3 @@
-//Name: Anish Budha
-//Email : abudha@myseneca.ca
-//Student Id : 174760215
-//Date : 9 /  / 2022
-//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
-
 #ifndef SDDS_CC_H 
 #define SDDS_CC_H
 #pragma once
